@@ -1,0 +1,29 @@
+{
+  "name": "calc_ipca_api",
+  "version": "1.0.0",
+  "description": "Calculadora de IPCA integrada com os dados no banco central para um trabalho de escolar",
+  "homepage": "https://github.com/gabb-dev/calc_ipca_api#readme",
+  "bugs": {
+    "url": "https://github.com/gabb-dev/calc_ipca_api/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabb-dev/calc_ipca_api.git"
+  },
+  "license": "ISC",
+  "author": "Gabriel Henrique",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "start:dev": "npx tsc && nodemon ./dist/app.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "typescript": "^7.0.2"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^6.1.1",
+    "@types/express": "^5.0.6"
+  }
+}
