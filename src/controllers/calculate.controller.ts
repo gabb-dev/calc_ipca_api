@@ -1,5 +1,9 @@
-import { Request, Response } from "express";
+import type { Request, Response } from "express";
 
 export class CalculateController {
-  getData(req: Request, res: Response) {}
+  calculate(req: Request, res: Response) {
+    const dates = req.query;
+
+    return res.send(dates);
+  }
 }

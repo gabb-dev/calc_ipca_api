@@ -1,0 +1,16 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debbugin TS",
+      "type": "node",
+      "request": "launch",
+      "args": ["src/app.ts"],
+      "runtimeArgs": ["-r", "ts-node/register"],
+      "cwd": "${workspaceRoot}",
+      "console": "integratedTerminal",
+      "sourceMaps": true,
+      "internalConsoleOptions": "neverOpen"
+    }
+  ]
+}
