@@ -1,8 +1,9 @@
 import type { NextFunction, Request, Response } from "express";
 import { BadRequestError } from "../common/errors/BadRequestError.error.js";
+import type { IMiddleware } from "../common/interfaces/middleware.interface.js";
 
 export class VerifyDateMiddleware {
-  static verify(req: Request, res: Response, next: NextFunction) {
+  static verify(req: Request, res: Response, next: NextFunction): void {
     const regexDate = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
     const dates = req.query;
 
@@ -27,8 +28,8 @@ export class VerifyDateMiddleware {
       }
 
       if (
-        regexDate.test(dates.startDate as string) ||
-        regexDate.test(dates.endDate as string)
+        !regexDate.test(dates.startDate as string) ||
+        !regexDate.test(dates.endDate as string)
       ) {
         throw new BadRequestError(
           "Formato das datas inválido. Use DD/MM/YYYY",
@@ -50,3 +51,5 @@ export class VerifyDateMiddleware {
     next();
   }
 }
+
+VerifyDateMiddleware satisfies IMiddleware;

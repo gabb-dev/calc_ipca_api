@@ -2,6 +2,7 @@ import { type Request, type Response, Router } from "express";
 import { CalculateController } from "../controllers/calculate.controller.js";
 import { verify } from "node:crypto";
 import { VerifyDateMiddleware } from "../middlewares/verifyDate.middleware.js";
+import { VerifyValueMiddleware } from "../middlewares/verifyValue.middleware.js";
 
 export class CalculateRouter {
   private routerApp: Router;
@@ -28,7 +29,7 @@ export class CalculateRouter {
 
   private getData(): void {
     this.routerApp.get("/", (req: Request, res: Response) => {
-      this.calculateController.calculate(req, res);
+      this.calculateController.getResult(req, res);
     });
 
     return;
@@ -36,6 +37,7 @@ export class CalculateRouter {
 
   private configMiddleware() {
     this.routerApp.use(VerifyDateMiddleware.verify);
+    this.routerApp.use(VerifyValueMiddleware.verify);
   }
 
   get getRouter(): Router {
