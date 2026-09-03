@@ -1,19 +1,19 @@
 import { Decimal } from "decimal.js";
-import type { BankCentralProvider } from "../providers/bankCentral.provider.js";
-import type { ResponseBankCentral } from "../common/types/responseBankCentral.js";
-import { ExternalServiceError } from "../common/errors/ExternalServiceError.error.js";
+import type { ICalculateService } from "../common/interfaces/calculateService.interface.js";
 
-export class CalculateService {
-  constructor(private readonly bankCentralProvide: BankCentralProvider) {}
+export class CalculateService implements ICalculateService {
+  constructor() {}
 
-  calculate(value: Decimal): Decimal {}
+  calculate(value: Decimal, porcentage: Decimal): string {
+    const newValue: Decimal = value.mul(porcentage);
 
-  private async getBankData(startDate: string, endDate: string) {
-    const responseBank: ResponseBankCentral | ExternalServiceError =
-      await this.bankCentralProvide.getDataApiBank(startDate, endDate);
+    const valueFormated: string = this.formatValues(newValue);
 
-    if (responseBank instanceof ExternalServiceError) {
-      return responseBank;
-    }
+    return valueFormated;
+  }
+
+  private formatValues(value: Decimal): string {
+    const valueFormated: string = value.toFixed(2);
+    return valueFormated;
   }
 }

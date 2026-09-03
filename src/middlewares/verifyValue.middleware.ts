@@ -1,6 +1,7 @@
 import type { Request, Response, NextFunction } from "express";
 import type { IMiddleware } from "../common/interfaces/middleware.interface.js";
 import { BadRequestError } from "../common/errors/BadRequestError.error.js";
+import { Decimal } from "decimal.js";
 
 export class VerifyValueMiddleware {
   static verify(req: Request, res: Response, next: NextFunction): void {
@@ -26,6 +27,8 @@ export class VerifyValueMiddleware {
       }
       next(e);
     }
+    const valueConvert = new Decimal(req.query.value as string);
+    (req.query as any).value = valueConvert;
     next();
   }
 }

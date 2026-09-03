@@ -11,10 +11,9 @@ export class ConectorBankCentralService {
       porcentagesFormated.push(porcentage);
     }
 
-    endPorcentage = new Decimal(porcentagesFormated[0]!);
-    for (const porcentage of porcentagesFormated) {
-      if (endPorcentage === porcentagesFormated[0]) continue;
-      endPorcentage = endPorcentage.mul(porcentage);
+    endPorcentage = porcentagesFormated[0]!;
+    for (let i = 1; i < porcentagesFormated.length; i++) {
+      endPorcentage = endPorcentage.mul(porcentagesFormated[i]!);
     }
     return endPorcentage;
   }
