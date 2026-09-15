@@ -1,4 +1,4 @@
-import express, { json } from "express";
+import express, { json, type Request, type Response } from "express";
 import dotenv from "dotenv";
 import { CalculateRouter } from "./routes/calculate.route.js";
 import { CalculateController } from "./controllers/calculate.controller.js";
@@ -34,6 +34,10 @@ const calculateRouter: CalculateRouter = new CalculateRouter(
 calculateRouter.start();
 
 app.use("/calculate", calculateRouter.getRouter);
+
+app.all("", (req: Request, res: Response) => {
+  res.send("Ola");
+});
 
 app.listen(process.env.PORT || 3000, () => {
   console.log(`Server rodando na porta ${process.env.PORT ?? 3000}`);

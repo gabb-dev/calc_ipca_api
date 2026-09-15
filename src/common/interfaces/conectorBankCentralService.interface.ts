@@ -1,6 +1,6 @@
 import { Decimal } from "decimal.js";
-import type { ResponseBankCentral } from "../types/responseBankCentral.js";
+import type { ResponseBankCentralDto } from "../../dtos/responseBankCentral.dto.js";
 
 export interface IConectorBankCentralService {
-  getPorcentageIPCA(dataBank: ResponseBankCentral): Decimal;
+  getPorcentageIPCA(dataBank: ResponseBankCentralDto[]): Decimal;
 }

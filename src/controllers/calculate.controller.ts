@@ -19,7 +19,7 @@ export class CalculateController implements ICalculateController {
       const data: ParamsDto = req.query as unknown as ParamsDto;
       const value: Decimal = new Decimal(data.value);
 
-      const bank: ResponseBankCentralDto | ExternalServiceError =
+      const bank: ResponseBankCentralDto[] | ExternalServiceError =
         await this.conectorBankCentral.getDataApiBank(
           data.startDate,
           data.endDate,
@@ -32,7 +32,7 @@ export class CalculateController implements ICalculateController {
           statusCode: bank.statusCode,
         });
 
-      const valueCalculate: Decimal = this.calculateService.calculate(
+      const valueCalculate: string = this.calculateService.calculate(
         value,
         this.conectorBankCentral.getPorcentagem,
       );
