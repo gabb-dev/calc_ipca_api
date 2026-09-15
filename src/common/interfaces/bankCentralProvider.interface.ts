@@ -6,7 +6,7 @@ export interface IBankCentralProvider {
   getDataApiBank(
     startDate: string,
     endDate: string,
-  ): Promise<ResponseBankCentralDto | ExternalServiceError>;
+  ): Promise<ResponseBankCentralDto[] | ExternalServiceError>;
   get getPorcentagem(): Decimal;
   get getPercentual(): string;
 }

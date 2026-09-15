@@ -20,7 +20,7 @@ export class BankCentralProvider implements IBankCentralProvider {
   async getDataApiBank(
     startDate: string,
     endDate: string,
-  ): Promise<ResponseBankCentralDto | ExternalServiceError> {
+  ): Promise<ResponseBankCentralDto[] | ExternalServiceError> {
     try {
       const resAxios: any = await this.axios.get(
         process.env.URL_BANK as string,
@@ -31,7 +31,7 @@ export class BankCentralProvider implements IBankCentralProvider {
           },
         },
       );
-      const resAxiosJson: ResponseBankCentralDto = JSON.parse(resAxios.data);
+      const resAxiosJson: ResponseBankCentralDto[] = JSON.parse(resAxios.data);
       this.porcentage =
         this.conectorBankService.getPorcentageIPCA(resAxiosJson);
       return resAxiosJson;
