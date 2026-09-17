@@ -1,5 +1,6 @@
 import express, { json, type Request, type Response } from "express";
 import dotenv from "dotenv";
+import cors from "cors";
 import { CalculateRouter } from "./routes/calculate.route.js";
 import { CalculateController } from "./controllers/calculate.controller.js";
 import { BankCentralProvider } from "./providers/bankCentral.provider.js";
@@ -11,6 +12,7 @@ import { CalculateService } from "./services/calculate.service.js";
 dotenv.config({ override: true });
 const app = express();
 
+app.use(cors({ methods: ["GET", "POST"], origin: process.env.CORS_ORIGIN }));
 app.use(json());
 
 const conectorBankCentralService: IConectorBankCentralService =
