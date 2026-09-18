@@ -12,7 +12,7 @@ import { CalculateService } from "./services/calculate.service.js";
 dotenv.config({ override: true });
 const app = express();
 
-app.use(cors({ methods: ["GET", "POST"], origin: process.env.CORS_ORIGIN }));
+app.use(cors({ origin: process.env.CORS_ORIGIN }));
 app.use(json());
 
 const conectorBankCentralService: IConectorBankCentralService =
