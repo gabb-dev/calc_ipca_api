@@ -7,6 +7,6 @@ export interface IBankCentralProvider {
     startDate: string,
     endDate: string,
   ): Promise<ResponseBankCentralDto[] | ExternalServiceError>;
-  get getPorcentagem(): Decimal;
-  get getPercentual(): string;
+  get getPorcentagem(): string;
+  get getPercentual(): Decimal;
 }

@@ -34,11 +34,12 @@ export class CalculateController implements ICalculateController {
 
       const valueCalculate: string = this.calculateService.calculate(
         value,
-        this.conectorBankCentral.getPorcentagem,
+        this.conectorBankCentral.getPercentual,
       );
 
       return res.status(200).json({
-        porcentage: this.conectorBankCentral.getPercentual,
+        porcentage: this.conectorBankCentral.getPorcentagem,
+        indexValue: this.conectorBankCentral.getPercentual,
         value: value,
         valueConverted: valueCalculate,
         statusCode: 200,
@@ -48,8 +49,6 @@ export class CalculateController implements ICalculateController {
         "Erro interno do servidor. Favor tente novamente mais tarde",
         500,
       );
-
-      console.log(e);
 
       return res.status(500).json({
         error: error.errorName,

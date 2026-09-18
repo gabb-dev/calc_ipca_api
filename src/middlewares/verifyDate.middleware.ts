@@ -40,6 +40,7 @@ export class VerifyDateMiddleware {
       if (error instanceof BadRequestError) {
         res.status(error.statusCode);
         res.json({
+          error: error.errorName,
           message: error.message,
           statusCode: error.statusCode,
         });

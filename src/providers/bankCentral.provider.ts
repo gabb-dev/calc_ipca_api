@@ -6,8 +6,7 @@ import { ExternalServiceError } from "../common/errors/ExternalServiceError.erro
 import type { ResponseBankCentralDto } from "../dtos/responseBankCentral.dto.js";
 
 export class BankCentralProvider implements IBankCentralProvider {
-  private porcentage: Decimal = new Decimal(0.0);
-  private percentual: string = "";
+  private percentual: Decimal = new Decimal(0.0);
 
   constructor(
     private readonly conectorBankService: IConectorBankCentralService,
@@ -32,8 +31,7 @@ export class BankCentralProvider implements IBankCentralProvider {
         },
       );
       const resAxiosJson: ResponseBankCentralDto[] = JSON.parse(resAxios.data);
-      this.porcentage =
-        this.conectorBankService.getPorcentageIPCA(resAxiosJson);
+      this.percentual = this.conectorBankService.getIndexIPCA(resAxiosJson);
       return resAxiosJson;
     } catch (e) {
       return new ExternalServiceError(
@@ -43,16 +41,14 @@ export class BankCentralProvider implements IBankCentralProvider {
     }
   }
 
-  get getPorcentagem(): Decimal {
-    return this.porcentage;
+  get getPorcentagem(): string {
+    const porcentage: Decimal = this.percentual.sub(1).mul(100);
+    const porcentageConvert: string = porcentage.toFixed(2);
+
+    return porcentageConvert;
   }
 
-  get getPercentual(): string {
-    this.porcentage.sub(1);
-    this.porcentage.mul(100);
-
-    this.percentual = this.porcentage.toFixed(2);
-
+  get getPercentual(): Decimal {
     return this.percentual;
   }
 }
